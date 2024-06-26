@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Advanced Calculator</h1>
+    <div id="calculator">
+        <input type="text" id="display" readonly>
+        <div class="button-row">
+            <button onclick="appendCharacter('7')">7</button>
+            <button onclick="appendCharacter('8')">8</button>
+            <button onclick="appendCharacter('9')">9</button>
+            <button onclick="appendCharacter('/')">/</button>
+            <button onclick="memoryFunction('MC')">MC</button>
+        </div>
+        <div class="button-row">
+            <button onclick="appendCharacter('4')">4</button>
+            <button onclick="appendCharacter('5')">5</button>
+            <button onclick="appendCharacter('6')">6</button>
+            <button onclick="appendCharacter('*')">*</button>
+            <button onclick="memoryFunction('MR')">MR</button>
+        </div>
+        <div class="button-row">
+            <button onclick="appendCharacter('1')">1</button>
+            <button onclick="appendCharacter('2')">2</button>
+            <button onclick="appendCharacter('3')">3</button>
+            <button onclick="appendCharacter('-')">-</button>
+            <button onclick="memoryFunction('M+')">M+</button>
+        </div>
+        <div class="button-row">
+            <button onclick="appendCharacter('0')">0</button>
+            <button onclick="appendCharacter('(')">(</button>
+            <button onclick="appendCharacter(')')">)</button>
+            <button onclick="appendCharacter('+')">+</button>
+            <button onclick="memoryFunction('M-')">M-</button>
+        </div>
+        <div class="button-row">
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="deleteCharacter()">Del</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendCharacter('%')">%</button>
+            <button onclick="calculateSquareRoot()">√</button>
+        </div>
+    </div>
+    <script>
+        let memory = 0;
+
+        function appendCharacter(char) {
+            const display = document.getElementById("display");
+            display.value += char;
+        }
+
+        function clearDisplay() {
+            document.getElementById("display").value = "";
+        }
+
+        function deleteCharacter() {
+            const display = document.getElementById("display");
+            display.value = display.value.slice(0, -1);
+        }
+
+        function calculate() {
+            const display = document.getElementById("display");
+            try {
+                display.value = eval(display.value.replace(/%/g, '/100'));
+            } catch (e) {
+                alert("Invalid Expression");
+                display.value = "";
+            }
+        }
+
+        function calculateSquareRoot() {
+            const display = document.getElementById("display");
+            try {
+                display.value = Math.sqrt(eval(display.value));
+            } catch (e) {
+                alert("Invalid Expression");
+                display.value = "";
+            }
+        }
+
+        function memoryFunction(action) {
+            const display = document.getElementById("display");
+            switch (action) {
+                case 'MC':
+                    memory = 0;
+                    break;
+                case 'MR':
+                    display.value += memory;
+                    break;
+                case 'M+':
+                    memory += eval(display.value);
+                    break;
+                case 'M-':
+                    memory -= eval(display.value);
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
