@@ -27,7 +27,7 @@ To use this calculator, simply clone or download the repository and open the ind
 
 Clone the Repository bash
 Copy code
-git clone https://github.com/yourusername/advanced-calculator.git
+git clone https://github.com/CoppsySK/advanced-calculator.git
 cd advanced-calculator
 Open index.html
 Open index.html in your web browser to start using the calculator.
